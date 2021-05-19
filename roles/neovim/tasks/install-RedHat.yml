@@ -1,0 +1,12 @@
+---
+- name: repo | redhat codeready
+  rhsm_repository: name={{ repo_codeready }}
+
+- name: rpm key | fedora.gpg
+  rpm_key: key=https://getfedora.org/static/fedora.gpg state=present
+    
+- name: repo | epel
+  yum: name={{ repo_epel }} state=present
+
+- name: pkg | neovim
+  yum: name=neovim state=present

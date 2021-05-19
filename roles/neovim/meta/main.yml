@@ -1,0 +1,20 @@
+galaxy_info:
+  role_name: neovim
+  author: Spencer Smolen
+  description: Ansible role to install neovim and, optionally, (1) a virutal environment for neovim plugins (2) a robust neovim configuration.
+  company: Xtal Systems
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+  - name: RHEL
+    versions:
+    - 8
+    - 7
+  galaxy_tags:
+    - neovim
+    - nvim
+    - vim
+    - workstation
+    - development
+    - texteditor
+dependencies: []

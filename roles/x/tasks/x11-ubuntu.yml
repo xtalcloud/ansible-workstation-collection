@@ -1,0 +1,8 @@
+---
+- name: INSTALL xserver packages
+  apt:
+    name:
+      - xserver-xorg-core
+      - xinit
+    install_recommends: no
+    state: latest

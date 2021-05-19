@@ -1,0 +1,15 @@
+---
+- name: pkgs | install depencies
+  package: name="{{ build_deps | map(attribute='name') | list }}" state=present
+
+- name: git | clone source repository
+  unarchive:
+    src: {{ archive_url }} 
+    dest: {{ src_dir }}
+    remote_src: yes
+
+- name: make | build git
+  make: chdir={{ src_dir }}
+
+- name: make | install git 
+  make: chdir={{ src_dir }} target=install

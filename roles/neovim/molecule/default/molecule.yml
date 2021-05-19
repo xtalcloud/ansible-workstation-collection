@@ -1,0 +1,29 @@
+---
+dependency:
+  name: galaxy
+  enabled: true
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: ubi7/ubi
+    registry:
+      url: registry.redhat.io
+      credentials:
+        username: 14107944|xtal
+        password: eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiJiMGFmY2FkYzMzY2U0ZTA4YmRmNDA3YTY4NWU3YWZiYyJ9.RYx1r_FXi5oQPrgufiD4tTRNdRH9h6jjiYAaA-LZaIkDmMqGjcNrEf3KxNv0q1kBWFA01bsPPxP5hn0Gqu9pN0WqImvaIlXXr5XbfxDKUYX2cHunlF-tgY9Sghyl1sF_cZrqJ2vFXbwi2haF1EQ2CRtX-vVlS7KdLc6CdPkukzmk0iL51dMiw8qwbCXCrUb1nO6a9P3Aqe6bIxBKaOSdT17C_8kcuPY6P_O-juSNSxjaEmppo6F4fMji0x-9UKgjmynonBDeA52deUpOjQx2s6bil3xOoX9_JDTbBkAf2FZazYVq6zvw6kFYIJJXyUVw8zLEFxjkrfVFWiTt6N3CjCE6nmX9Ph-N53i9v3eDW-JKUzsILHu0E1xOKy2rjCjG6nVeXwjmZkMh4aUQklfdq4nUo2F55a35yGYNV_ObSKR3myHjZ5PVH6dM26p87VCQgoh9lk92IMGIk9V7ByCKdt2TSXOb1zeNPPTW16ZeKrig7VQTlS974zdBDxCtcWw2H71BvJ0d18mcU5JanopnCV8jkjDn0F8O1GVSkpb6RCXQPLtz_6d70Lr35Hc7i6QRIPm-Mb2_NPGSG7FIHVivQVT8R70-ZuEzzvEkwh826JEY-KAAqoEG86Fm3J-Ovg0nsaxA0JfKUSndbChVm2mCgSta69btHjdZhJV7stuF3Fc
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      stdout_callback: yaml
+      bin_ansible_callbacks: true
+      vault_password_file: ~/.ansible/vault_password
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+    prepare: prepare.yml
+verifier:
+  name: ansible
+lint: |
+  set -e
+  ansible-lint .

@@ -1,0 +1,19 @@
+---
+
+# - debug: msg="{{ build_deps | map(attribute='repo') | unique | list }}"
+# - debug: msg="{{ build_deps | map(attribute='name') | list }}"
+
+# - debug: msg="{{ item }}"
+#   loop: "{{ build_deps | map(attribute='repo') | unique | list }}"
+# 
+# - name: repo | neededed for build dependencies 
+#   rhsm_repository: name="{{ build_deps | map(attribute='repo') | unique | list }}"
+
+ - name: pkgs | install depencies
+   package: name="{{ build_deps | map(attribute='name') | list }}" state=present
+ 
+ - name: git | clone source repository
+   git: repo={{ git_url }} dest={{ src_dir }} version={{ git_tag }}
+ 
+ - name: make | install st
+   make: chdir={{ src_dir }} target=install

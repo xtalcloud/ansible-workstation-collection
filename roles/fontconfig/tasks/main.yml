@@ -1,0 +1,55 @@
+---
+
+- name: pkg | fontconfig
+  package: name=fontconfig state=present
+
+  #
+  # TASKS: INSTALL NEW FONT
+  #
+
+- name: fontconfig | install TrueType font
+  block:
+
+  - name: download | TTF font file archive
+    get_url:
+      url: "{{ font_archive_full_url }}"
+      checksum: "{{ font_archive_checksum_str }}"
+      dest: /tmp
+
+  - name: unarchive | TTF font file archive
+    unarchive:
+      src: /tmp/{{ font_archive_checksum }}.tar
+      dest: /usr/share/fonts
+      remote_src: yes
+
+  - name: pkg | fontconfig tools
+    package: name={{ x11_font_utils }} state=present
+
+  - name: fontconfig | mkfontdir
+    command: mkfontdir /usr/share/fonts/{{ font_family_dirname }}
+
+  - name: fontconfig | mkfontsize
+    command: mkfontscale /usr/share/fonts/{{ font_family_dirname }}
+
+  - name: fontconfig | generate fc-cache
+    command: fc-cache /usr/share/fonts/{{ font_family_dirname }}
+
+  when: font_family != ""
+
+  #
+  # TASKS: SET DEFAULT SYSTEM FONT
+  #
+
+- name: fontconfig | set local configuration options
+  block:
+
+  - name: fontconfig | set system font(s)
+    template: src=local.conf.j2 dest=/etc/fonts/local.conf
+
+  - name: fontconfig | load local customization file during fontconfig init
+    template: src=51-local.conf.j2 dest=/etc/fonts/conf.d/51-local.conf
+
+  when: ( system_monospace_font_family is defined ) or 
+        ( system_serif_font_family is defined ) or
+        ( system_sans_serif_font_family is defined ) 
+

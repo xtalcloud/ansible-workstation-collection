@@ -1,0 +1,9 @@
+---
+python3: python3
+python3_devel: python3-devel
+python3_pip: python3-pip
+python3_virtualenv: python3-virtualenv
+ctags: ctags-etags
+
+repo_codeready: codeready-builder-for-rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}-rpms
+repo_epel: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm

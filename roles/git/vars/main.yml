@@ -1,0 +1,9 @@
+---
+git_release: 2.30.1
+git_url: https://mirrors.edge.kernel.org/pub/software/scm/git/git-{{ git_release }}.tar.gz 
+src_dir: /usr/share/src/git
+
+build_deps:
+  - name: libcurl-devel
+    repo: rhel-8-for-x86_64-baseos-rpms
+    run_dep: yes

@@ -1,0 +1,9 @@
+---
+git_url: https://github.com/hanschen/ksuperkey.git
+git_tag: v0.4
+src_dir: /usr/share/src/ksuperkey
+
+build_deps:
+  - name: libXtst-devel
+    repo: rhel-8-for-x86_64-appstream-rpms
+    run_dep: yes

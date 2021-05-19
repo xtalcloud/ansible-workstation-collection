@@ -1,0 +1,9 @@
+---
+ - name: pkgs | install depencies
+   package: name="{{ build_deps | map(attribute='name') | list }}" state=present
+ 
+ - name: git | clone source repository
+   git: repo={{ git_url }} dest={{ src_dir }} version={{ git_tag }}
+ 
+ - name: make | install hsetroot
+   make: chdir={{ src_dir }} target=install

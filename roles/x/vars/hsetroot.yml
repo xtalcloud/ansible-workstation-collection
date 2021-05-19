@@ -1,0 +1,23 @@
+---
+git_url: https://github.com/himdel/hsetroot.git
+git_tag: '1.0.5'
+build_deps:
+  - pkg: imlib2-devel
+    repo: epel
+    run_dep: yes
+
+  - pkg: mesa-libGL-devel
+    repo: rhel-8-for-x86_64-appstream-rpms
+    run_dep: yes
+
+    pkg: libXcomposite-devel
+  - repo: rhel-8-for-x86_64-appstream-rpms
+    run_dep: yes
+
+    pkg: libX11-devel
+  - repo: rhel-8-for-x86_64-appstream-rpms
+    run_dep: yes
+
+    pkg: libXext-devel
+  - repo: rhel-8-for-x86_64-appstream-rpms
+    run_dep: yes

@@ -1,0 +1,4 @@
+---
+nvim_config_url:  https://raw.githubusercontent.com/Optixal/neovim-init.vim/master/init.vim
+configure_nvim: true
+create_nvim_virtualenv: true

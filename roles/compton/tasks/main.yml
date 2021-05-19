@@ -1,0 +1,22 @@
+---
+
+# - name: repo | neededed for build dependencies 
+#   rhsm_repository: name="{{ build_deps | map(attribute='repo') | unique | list }}" state=present
+
+- name: pkgs | install depencies
+  package: name="{{ build_deps | map(attribute='name') | list }}" state=present
+
+- name: git | clone source repository
+  git: repo={{ git_url }} dest={{ src_dir }} version={{ git_tag }}
+
+- name: make | make the main program
+  make: chdir={{ src_dir }}
+
+- name: make | make the docs
+  make: chdir={{ src_dir }} target=docs
+
+- name: make | install compton
+  make: chdir={{ src_dir }} target=install
+
+- name: copy | compton configuration file
+  template: src=compton.conf.j2 dest=/etc/xdg/compton.conf 

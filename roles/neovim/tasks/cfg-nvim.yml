@@ -1,0 +1,57 @@
+---
+- name: install nvim-related OS packages
+  package: name={{ item }} state=present
+  loop:
+    - git
+    - curl
+    - "{{ ctags }}"
+    - gcc
+    - make
+
+
+- name: install NVIM-related Python packages
+  pip: name={{ item }} virtualenv={{ nvim_system_venv }}
+  loop:
+    - pynvim
+    - jedi
+    - psutil
+    - setproctitle
+    - yapf
+    - doq
+
+- name: mkdir | nvim (system) directories 
+  file: path={{ item }} state=directory owner=root group=root mode=0755
+  loop:
+    - "{{ nvim_system_runtime_dir }}"
+    - "{{ nvim_system_runtime_dir }}/autoload"
+    - "{{ nvim_system_runtime_dir }}/pack"
+    - "{{ nvim_system_config_dir }}"
+
+- name: download | init.vim
+  get_url:
+    url: "{{ nvim_config_url }}"
+    dest: "{{ nvim_system_config_dir }}/sysinit.vim"
+    mode: 0644
+
+- name: init.vim | g:nvim_system_wide = 1"
+  lineinfile:
+    path: "{{ nvim_system_config_dir }}/sysinit.vim"
+    regex: '^let g:nvim_system_wide'
+    line: 'let g:nvim_system_wide = 1'
+
+- name: init.vim | g:python3_host_prog = ${nvim_venv}/bin/python
+  lineinfile:
+    path: "{{ nvim_system_config_dir }}/sysinit.vim"
+    regex: ^let g:python3_host_prog
+    line: let g:python3_host_prog = '{{ nvim_system_venv }}/bin/python'
+
+- name: download | vim-plug
+  get_url:
+    url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    dest: "{{ nvim_system_runtime_dir }}/autoload"
+    mode: 0755
+
+- name: install nvim plugins
+  shell: | 
+        sed '/call plug#end/q' /etc/xdg/nvim/sysinit.vim > /tmp/init.vim \
+        && nvim -u /tmp/init.vim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall'

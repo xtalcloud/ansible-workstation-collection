@@ -1,0 +1,37 @@
+---
+git_url: https://github.com/chjj/compton.git
+git_tag: 316eac0613bf342ff91cc645a6c3c80e6b9083fb
+src_dir: /usr/share/src/compton
+
+build_deps:
+ - name: libconfig-devel
+   repo: codeready-builder-for-rhel-8-x86_64-rpms
+   run_dep: yes
+
+ - name: mesa-libGL-devel
+   repo: rhel-8-for-x86_64-appstream-rpms
+   run_dep: yes
+
+ - name: libXcomposite-devel
+   repo: rhel-8-for-x86_64-appstream-rpms
+   run_dep: yes
+
+ - name: libXrandr-devel
+   repo: rhel-8-for-x86_64-appstream-rpms
+   run_dep: yes
+
+ - name: libXdamage-devel
+   repo: rhel-8-for-x86_64-appstream-rpms
+   run_dep: yes
+
+ - name: libdrm-devel
+   repo: rhel-8-for-x86_64-appstream-rpms
+   run_dep: yes
+
+ - name: dbus-devel
+   repo: rhel-8-for-x86_64-appstream-rpms
+   run_dep: yes
+
+ - name: asciidoc
+   repo: rhel-8-for-x86_64-appstream-rpms
+   run_dep: no

@@ -1,0 +1,16 @@
+- name: gather os specific variables
+  include_vars: dir=../defaults/{{ ansible_distribution }}
+
+- name: install | neovim
+  include_tasks: install-{{ ansible_distribution }}.yml
+  tags: install
+
+- name: venv | neovim
+  include_tasks: cfg-venv.yml
+  when: create_nvim_virtualenv
+  tags: config
+
+- name: cfg | neovim
+  include_tasks: cfg-nvim.yml
+  when: configure_nvim
+  tags: config

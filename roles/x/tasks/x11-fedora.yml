@@ -1,0 +1,7 @@
+---
+- name: INSTALL x11 packages
+  dnf:
+    name:
+      - @base-x
+      - xorg-x11-xinit
+    state: present

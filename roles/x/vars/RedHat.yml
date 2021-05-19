@@ -1,0 +1,5 @@
+pkgs:
+  - xorg-x11-server-Xorg
+  - xorg-x11-drivers
+  - xorg-x11-xauth
+  - xorg-x11-xinit

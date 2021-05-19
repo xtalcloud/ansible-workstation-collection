@@ -1,0 +1,8 @@
+---
+# - hosts: workstations
+#   roles:
+#     - role: xtal.linux.rhsm
+
+- hosts: workstations
+  roles:
+    - role: xtal.workstation.neovim

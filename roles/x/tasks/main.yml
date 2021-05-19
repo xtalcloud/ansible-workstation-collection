@@ -1,0 +1,6 @@
+---
+- name: load packages required by each distro to run X
+  include_vars: file={{ ansible_distribution }}.yml
+
+- package: name={{ item }} state=present
+  loop: "{{ pkgs }}"

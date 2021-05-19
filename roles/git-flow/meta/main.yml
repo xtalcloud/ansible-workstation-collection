@@ -1,0 +1,20 @@
+---
+dependencies:
+  - xtal.workstation.git
+
+galaxy_info:
+  author: Spencer Smolen
+  description: installs a basic dwm desktop environment
+  company: Xtal Systems
+
+  license: license (GPL-2.0-or-later, MIT, etc)
+
+  min_ansible_version: 2.9
+
+  platforms:
+  - name: EL
+    versions:
+    - 8
+    - 25
+
+  galaxy_tags: []

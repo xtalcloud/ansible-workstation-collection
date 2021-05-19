@@ -1,0 +1,20 @@
+# https://neovim.io/doc/user/provider.html - see "provider-python"
+---
+- name: pkg | virtualenv packages
+  package: name={{ item }} state=present
+  loop:
+    - "{{ python3 }}"
+    - "{{ python3_devel }}"
+    - "{{ python3_pip }}"
+    - "{{ python3_virtualenv }}"
+
+- name: stat | check if neovim virtualenv exists
+  stat: path={{ nvim_system_venv }}/bin/activate
+  register: nvim_venv
+
+- name: venv | create neovim virtualenv
+  command: python3 -m venv {{ nvim_system_venv }}
+  when: not nvim_venv.stat.exists
+
+- name: venv | pip installs in neovim virtualenv
+  pip: name=pynvim virtualenv={{ nvim_system_venv }}

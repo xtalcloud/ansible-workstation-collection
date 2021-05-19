@@ -1,0 +1,8 @@
+---
+prefix: /usr
+xdg_system_config_dir: /etc/xdg
+nvim_system_data_dir: "{{ prefix }}/share/nvim"
+nvim_system_runtime_dir: "{{ prefix }}/share/nvim/runtime"
+nvim_system_config_dir: "{{ xdg_system_config_dir }}/nvim"
+nvim_system_venv: "{{ xdg_system_config_dir }}/nvim/env"
+xdg_user_config_dir: ~/.config

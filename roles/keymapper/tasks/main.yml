@@ -1,0 +1,3 @@
+---
+- name: install "keymapper" script
+  template: src=keymapper.j2 dest=/usr/bin/keymapper mode=0755

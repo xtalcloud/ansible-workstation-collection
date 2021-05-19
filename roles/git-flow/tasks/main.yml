@@ -1,0 +1,48 @@
+---
+# tasks file for dwm
+#
+- name: git | clone nvie/gitflow
+  git:
+    repo: 'git://github.com/nvie/gitflow.git'
+    dest: /usr/local/src/gitflow
+
+- name: git | clone source repository
+  make:
+    target: install
+    chdir: /usr/local/src/gitflow 
+    params:
+      PREFIX: {{ prefix }}
+
+- name: make | install dwm
+  make: chdir={{ src_dir }} target=install
+
+- name: copy | /etc/X11/xinit/Xclients.d/Xclients.dwm.sh
+  template:
+    src: Xclients.dwm.sh.j2
+    dest: /etc/X11/xinit/Xclients.d/Xclients.dwm.sh
+    mode: 0644
+    owner: root
+    group: root
+
+- name: copy | /usr/bin/dwm-xtal
+  template:
+    src: Xclients.dwm.sh.j2
+    dest: /usr/bin/dwm-xtal
+    mode: 0755
+    owner: root
+    group: root
+
+- name: copy | /usr/share/xsessions/dwm.desktop
+  template:
+    src: dwm.desktop.j2
+    dest: /usr/share/xsessions/dwm.desktop
+    mode: 0644
+    owner: root
+    group: root
+
+- debug: msg="{{ enable_compositing }}"
+
+- name: desktop | enable compositing
+  import_role: name=xtal.workstation.compton
+  when: enable_compositing
+

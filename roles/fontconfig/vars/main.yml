@@ -1,0 +1,10 @@
+---
+# vars file for fontconfig
+x11_font_utils: xorg-x11-font-utils
+fontconfig: fontconfig
+
+font_archive_root_url: https://xtal-devops.s3.amazonaws.com/provisioning/fonts
+
+
+
+

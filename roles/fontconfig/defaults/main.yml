@@ -1,0 +1,9 @@
+---
+# defaults file for fontconfig
+#
+font_archive_hash_algo: sha256
+font_archive_checksum_str: "{{ font_archive_hash_algo }}:{{ font_archive_checksum }}"
+
+font_archive_full_url: "{{ font_archive_root_url }}/{{ font_family|urlencode }}/{{ font_archive_checksum }}.tar"
+font_family_dirname: "{{ font_family|lower|replace(' ','-')  }}"
+

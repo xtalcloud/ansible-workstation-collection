@@ -1,0 +1,9 @@
+#!/bin/sh
+
+hsetroot -solid '{{  desktop_color }}' &
+{% if enable_compositing %}
+compton &
+{% endif %}
+keymapper &
+st &
+exec dwm
