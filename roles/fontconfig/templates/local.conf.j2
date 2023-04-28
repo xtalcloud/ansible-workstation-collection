@@ -18,5 +18,10 @@
     <family>monospace</family>
     <prefer><family>{{ system_monospace_font_family }}</family></prefer>
   </alias>
+{% else -%}
+  <alias>
+    <family>monospace</family>
+    <prefer><family>{{ font_family }}</family></prefer>
+  </alias>
 {% endif %}
 </fontconfig>

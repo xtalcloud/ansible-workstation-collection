@@ -1,15 +1,15 @@
 namespace: xtal
 name: workstation
-version: 0.1.0
+version: 0.1.1
 readme: README.md
 
 authors:
-- Spencer Smolen <spencer@xtal.cloud>
+- Spencer Smolen <mail@spencersmolen.com>
 
-description: "All the comforts of modern living" - roles to turn a raw RHEL server install into a developer-friendly workstation for terminal-based, vim-intensive work flows.
+description: Roles to turn a fresh EL server install into a developer-friendly workstation for terminal-based, vim-intensive work flows
 
 license:
-- GPL-2.0-or-later
+- GPLv3
 
 license_file: ''
 
@@ -24,9 +24,7 @@ tags:
   - workstation
   - development
 
-dependencies: {
-  xtal.EL: 0.1.0
-}
+dependencies: {}
 
 repository: http://github.com/xtalcloud/ansible-workstation-collection.git
 documentation: http://github.com/xtalcloud/ansible-workstation-collection/blob/master/README.md

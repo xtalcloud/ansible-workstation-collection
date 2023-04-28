@@ -1,0 +1,15 @@
+---
+# tasks file for epel
+- name: Enable RHSM repo - codeready-builder-rpms
+  community.general.rhsm_repository:
+    name: codeready-builder-for-rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}-rpms
+
+- name: Import a key from a url
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+
+- name: Enable external repo - EPEL
+  ansible.builtin.dnf:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
+    state: present

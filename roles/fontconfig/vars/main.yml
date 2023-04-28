@@ -1,10 +1,7 @@
 ---
-# vars file for fontconfig
-x11_font_utils: xorg-x11-font-utils
-fontconfig: fontconfig
-
-font_archive_root_url: https://xtal-devops.s3.amazonaws.com/provisioning/fonts
-
+font_family: Cousine Nerd Font
+font_archive_url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Cousine.zip
+font_dest_dir: /usr/share/fonts/truetype/{{ font_family|lower|replace(' ','-') }}
 
 
 

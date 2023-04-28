@@ -1,4 +1,7 @@
 ---
+- name: install EPEL repo
+  package: name=epel-release state=present
+
 
 # - name: repo | neededed for build dependencies 
 #   rhsm_repository: name="{{ build_deps | map(attribute='repo') | unique | list }}" state=present

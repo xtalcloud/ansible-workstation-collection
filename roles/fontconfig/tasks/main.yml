@@ -3,44 +3,37 @@
 - name: pkg | fontconfig
   package: name=fontconfig state=present
 
-  #
-  # TASKS: INSTALL NEW FONT
-  #
+- name: pkg | mkfontscale tools
+  package: name=mkfontscale state=present
+  when: ansible_os_family == "RedHat"
 
-- name: fontconfig | install TrueType font
+- name: pkg | xfont_utils tools
+  package: name=xfont_utils state=present
+  when: ansible_os_family == "Debian"
+
+
+- name: INSTALLING FONT FILES
   block:
 
-  - name: download | TTF font file archive
-    get_url:
-      url: "{{ font_archive_full_url }}"
-      checksum: "{{ font_archive_checksum_str }}"
-      dest: /tmp
+  - name: Create specified fonts target directory
+    ansible.builtin.file: path={{ font_dest_dir }} state=directory mode=0755
 
   - name: unarchive | TTF font file archive
-    unarchive:
-      src: /tmp/{{ font_archive_checksum }}.tar
-      dest: /usr/share/fonts
-      remote_src: yes
-
-  - name: pkg | fontconfig tools
-    package: name={{ x11_font_utils }} state=present
+    unarchive: src={{ font_archive_url }} dest={{ font_dest_dir }} remote_src=yes
 
   - name: fontconfig | mkfontdir
-    command: mkfontdir /usr/share/fonts/{{ font_family_dirname }}
+    command: mkfontdir {{ font_dest_dir }}
 
   - name: fontconfig | mkfontsize
-    command: mkfontscale /usr/share/fonts/{{ font_family_dirname }}
+    command: mkfontscale  {{ font_dest_dir }}
 
   - name: fontconfig | generate fc-cache
-    command: fc-cache /usr/share/fonts/{{ font_family_dirname }}
+    command: fc-cache {{ font_dest_dir }}
 
   when: font_family != ""
 
-  #
-  # TASKS: SET DEFAULT SYSTEM FONT
-  #
 
-- name: fontconfig | set local configuration options
+- name: CONFIGURING FONTCONFIG
   block:
 
   - name: fontconfig | set system font(s)
@@ -48,8 +41,3 @@
 
   - name: fontconfig | load local customization file during fontconfig init
     template: src=51-local.conf.j2 dest=/etc/fonts/conf.d/51-local.conf
-
-  when: ( system_monospace_font_family is defined ) or 
-        ( system_serif_font_family is defined ) or
-        ( system_sans_serif_font_family is defined ) 
-

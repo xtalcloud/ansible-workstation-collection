@@ -1,15 +1,14 @@
 ---
 - hosts: workstations
+  become: yes
   vars:
     terminal_emulator: st
     desktop_color: #151515
   roles:
-    - role: xtal.workstation.dwm
-      vars: { enable_compositing: true }
-
+    - role: xtal.workstation.epel
     - role: xtal.workstation.fontconfig
+    - role: xtal.workstation.ksuperkey
+    - role: xtal.workstation.dwm
       vars:
-        system_monospace_font_family: Cousine Nerd Font Mono
-        font_family: Cousine Nerd Font Mono
-        font_archive_checksum: d28664e7e9bb419e20b9814003df0610ae9fd95901acf5733f3d42bbd4ed04e5
+        - enable_compositing: true
 

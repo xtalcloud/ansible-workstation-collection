@@ -1,7 +1,4 @@
 ---
-dependencies:
-   - xtal.linux.epel
-
 galaxy_info:
   author: Spencer Smolen
   description: installs hsetroot

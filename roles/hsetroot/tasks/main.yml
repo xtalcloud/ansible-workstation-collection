@@ -1,4 +1,7 @@
 ---
+ - name: install EPEL repo
+   package: name=epel-release state=present
+
  - name: pkgs | install depencies
    package: name="{{ build_deps | map(attribute='name') | list }}" state=present
  
