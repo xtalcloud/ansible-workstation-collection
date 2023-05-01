@@ -1,0 +1,8 @@
+pkgs:
+  - xserver-xorg-core
+  - xserver-xorg-video-all
+  - xserver-xorg-input-all
+  - x11-xserver-utils
+  - x11-xkb-utils
+  - x11-utils
+  - xinit
