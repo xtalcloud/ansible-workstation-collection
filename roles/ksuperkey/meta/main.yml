@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - xtal.workstation.x
+  - xtal.workstation.x11
 
 galaxy_info:
   author: your name
