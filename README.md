@@ -1,6 +1,6 @@
 # Ansible Enterprise Linux Workstation Collection
 
-This Ansible Collection is meant to be used with a fresh install of EL 8. It was built testing on RHEL8 & Rocky Linux 8.
+This Ansible Collection is meant to be used with a fresh install of EL 8 or EL 9. 
 
 It includes a minimal GUI and many common command line tools common in terminal-based workflows.
 
